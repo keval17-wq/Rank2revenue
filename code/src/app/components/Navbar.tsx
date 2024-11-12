@@ -1,77 +1,194 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { FiMenu } from "react-icons/fi";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Helper function to check if link is active
   const isActive = (path: string) => pathname === path;
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        // Hide navbar on scroll down
         setIsVisible(false);
       } else {
-        // Show navbar on scroll up
         setIsVisible(true);
       }
-      setLastScrollY(currentScrollY);
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY]);
+  }, []);
 
   return (
-    <nav
-      className={`w-full bg-gray-50 border-b shadow-md fixed top-0 left-0 z-10 transition-transform duration-300 ${
-        isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
-      }`}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 py-6 transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      } bg-transparent`}
     >
-      <div className="flex justify-between items-center px-4 lg:px-8 py-4 max-w-screen-2xl mx-auto">
-        {/* Left - Logo */}
-        <div className="flex items-center space-x-2">
-          <Link href="/" className="text-xl font-semibold text-gray-800">
-            Rank2Revenue
-          </Link>
-        </div>
+      <div className="mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5">
+        <nav className="flex justify-between items-center">
+          {/* Logo and Mobile Menu Button */}
+          <div className="flex items-center gap-6">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="block lg:hidden text-black text-2xl"
+              onClick={() => setIsOpen((pv) => !pv)}
+            >
+              <FiMenu />
+            </motion.button>
+            <Link href="/" className="text-xl font-semibold text-black">
+              Rank2Revenue
+            </Link>
+          </div>
 
-        {/* Center - Navigation Links */}
-        <div className="hidden lg:flex space-x-6 text-gray-700">
-          <Link href="/" className={isActive('/') ? 'text-indigo-600 font-bold' : 'hover:text-gray-900 font-medium'}>
-            Home
-          </Link>
-          <Link href="/services" className={isActive('/services') ? 'text-indigo-600 font-bold' : 'hover:text-gray-900 font-medium'}>
-            Services
-          </Link>
-          <Link href="/work" className={isActive('/work') ? 'text-indigo-600 font-bold' : 'hover:text-gray-900 font-medium'}>
-            Work
-          </Link>
-          <Link href="/about" className={isActive('/about') ? 'text-indigo-600 font-bold' : 'hover:text-gray-900 font-medium'}>
-            About Us
-          </Link>
-          <Link href="/blog" className={isActive('/blog') ? 'text-indigo-600 font-bold' : 'hover:text-gray-900 font-medium'}>
-            Blog
-          </Link>
-        </div>
+          {/* Desktop Navigation Links */}
+          <ul className="hidden lg:flex space-x-6 text-black font-medium">
+            <li>
+              <Link
+                href="/"
+                className={`hover:text-blue-600 ${
+                  isActive("/") ? "text-blue-600" : ""
+                }`}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/services"
+                className={`hover:text-blue-600 ${
+                  isActive("/services") ? "text-blue-600" : ""
+                }`}
+              >
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/work"
+                className={`hover:text-blue-600 ${
+                  isActive("/work") ? "text-blue-600" : ""
+                }`}
+              >
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className={`hover:text-blue-600 ${
+                  isActive("/about") ? "text-blue-600" : ""
+                }`}
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                className={`hover:text-blue-600 ${
+                  isActive("/blog") ? "text-blue-600" : ""
+                }`}
+              >
+                Blog
+              </Link>
+            </li>
+          </ul>
 
-        {/* Right - Contact Button */}
-        <div className="flex items-center">
-          <Link href="/contact" className="btn bg-indigo-600/95 text-white transition-colors hover:bg-indigo-700 px-6 py-2">
+          {/* Contact Button */}
+          <Link
+            href="/contact"
+            className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
+          >
             Contact
           </Link>
-        </div>
+        </nav>
+
+        {/* Mobile Menu */}
+        <motion.div
+          initial={{ height: 0 }}
+          animate={{ height: isOpen ? "auto" : 0 }}
+          className="overflow-hidden lg:hidden mt-4"
+        >
+          <ul className="flex flex-col space-y-4 text-black font-medium">
+            <li>
+              <Link
+                href="/"
+                className={`hover:text-blue-600 ${
+                  isActive("/") ? "text-blue-600" : ""
+                }`}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/services"
+                className={`hover:text-blue-600 ${
+                  isActive("/services") ? "text-blue-600" : ""
+                }`}
+              >
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/work"
+                className={`hover:text-blue-600 ${
+                  isActive("/work") ? "text-blue-600" : ""
+                }`}
+              >
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className={`hover:text-blue-600 ${
+                  isActive("/about") ? "text-blue-600" : ""
+                }`}
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                className={`hover:text-blue-600 ${
+                  isActive("/blog") ? "text-blue-600" : ""
+                }`}
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="hover:text-blue-600 text-blue-600"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </motion.div>
       </div>
-    </nav>
+    </header>
   );
 };
 

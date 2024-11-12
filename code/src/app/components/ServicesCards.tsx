@@ -1,56 +1,115 @@
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const ServicesCards: React.FC = () => {
   const services = [
-    { title: 'Search Engine Optimization (SEO)', href: '#' },
-    { title: 'Content Marketing', href: '#' },
-    { title: 'Social Media Management', href: '#' },
-    { title: 'Pay-Per-Click Advertising (PPC)', href: '#' },
-    { title: 'Email Marketing', href: '#' },
-    { title: 'Web Design', href: '#' },
+    {
+      title: 'Website Development',
+      href: '/services/websiteDevelopment',
+      description: `
+        We create professional, responsive websites tailored to your business needs, ranging from simple starter sites to fully customized websites with advanced features.
+      `,
+      icon: 'https://img.icons8.com/ios-filled/100/web.png',
+    },
+    {
+      title: 'SEO Optimization',
+      href: '/services/seoOptimization',
+      description: `
+        Improve your website's visibility on search engines with our SEO services, focusing on targeted keywords and local or national reach to drive more organic traffic.
+      `,
+      icon: 'https://img.icons8.com/ios-filled/100/seo.png',
+    },
+    {
+      title: 'Social Media Management',
+      href: '/services/socialMediaManagement',
+      description: `
+        Enhance your social media presence with regular posts, targeted audience engagement, and brand-optimized profiles on platforms like Facebook and Instagram.
+      `,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          className="h-16 w-16 sm:h-20 sm:w-20 text-blue-600 mx-auto mb-4"
+        >
+          <path d="M0 64C0 28.7 28.7 0 64 0L384 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM256 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM384 64L64 64l0 320 320 0 0-320z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Content Creation',
+      href: '/services/contentCreation',
+      description: `
+        Our team crafts high-quality content and visuals to attract and engage your target audience, including blog posts, social media graphics, and more.
+      `,
+      icon: 'https://img.icons8.com/ios-filled/100/content.png',
+    },
+    {
+      title: 'Email Marketing (EDM)',
+      href: '/services/emailMarketing',
+      description: `
+        Reach your audience directly with professionally designed email campaigns, tailored messaging, and regular engagement to keep your brand top of mind.
+      `,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          className="h-16 w-16 sm:h-20 sm:w-20 text-blue-600 mx-auto mb-4"
+        >
+          <path d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Area Marketing',
+      href: '/services/areaMarketing',
+      description: `
+        We focus on hyper-local marketing efforts within a targeted radius around your business to attract customers from nearby areas and boost foot traffic.
+      `,
+      icon: 'https://img.icons8.com/ios-filled/100/area-chart.png',
+    },
   ];
 
   return (
-    <section className="bg-white py-24 px-4 lg:px-16">
-      <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]">
-        <h1 className="text-center text-5xl pb-12">Our Digital Marketing Services</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-28 lg:gap-y-16">
+    <section className="w-full bg-white py-24 px-4">
+      <div className="w-full max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5">
+        <h1 className="text-center text-4xl md:text-5xl font-semibold text-gray-900 pb-12">
+          Our Digital Marketing Services
+        </h1>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
           {services.map((service) => (
-            <a
+            <Link
               key={service.title}
               href={service.href}
-              className="group relative block h-64 sm:h-80 lg:h-96"
+              className="group relative block h-72 sm:h-80 lg:h-96 transition-all duration-300"
             >
-              <span className="absolute inset-0 border-2 border-dashed border-black rounded-xl"></span>
+              <span className="absolute inset-0 border-2 border-dashed border-blue-600 rounded-xl transition-transform duration-300 transform group-hover:scale-105"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 rounded-xl">
-                <div className="p-6 w-full text-center !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              <div className="relative flex h-full items-end border-2 border-blue-600 bg-white rounded-xl p-6 transition-transform duration-300 transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="w-full text-center transition-opacity duration-300 group-hover:opacity-0">
+                  {typeof service.icon === 'string' ? (
+                    <Image
+                      src={service.icon}
+                      alt={`${service.title} icon`}
+                      width={80}
+                      height={80}
+                      className="h-16 w-16 sm:h-20 sm:w-20 text-blue-600 mx-auto mb-4"
                     />
-                  </svg>
-                  <h3 className="text-xl font-medium">{service.title}</h3>
+                  ) : (
+                    service.icon
+                  )}
+                  <h3 className="text-xl font-medium text-gray-900">{service.title}</h3>
                 </div>
 
-                <div className="absolute p-6 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 text-center">
-                  <h3 className="text-xl font-medium">{service.title}</h3>
-                  <p className="mt-4 text-sm">
-                    Explore our {service.title.toLowerCase()} service and discover how we can help you achieve your goals.
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-white bg-opacity-90 rounded-xl text-center">
+                  <h3 className="text-xl font-semibold text-gray-900">{service.title}</h3>
+                  <p className="mt-4 text-sm text-gray-700 whitespace-pre-line">
+                    {service.description}
                   </p>
-                  <p className="mt-8 font-bold">Read more</p>
+                  <p className="mt-8 font-bold text-blue-600">Read more</p>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

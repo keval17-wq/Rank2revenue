@@ -6,6 +6,7 @@ import Footer from '../components/Footer'; // Adjust the path if necessary
 import ServicesCards from '../components/ServicesCards';
 import Hero from '../components/Hero'; // Import Hero component
 
+
 const Services = () => {
   return (
     <div>
@@ -17,12 +18,15 @@ const Services = () => {
         subtitle="Your One-Stop Solution for Digital Success"
         description="From SEO to branding and web development, our expert team is here to elevate your online presence, drive growth, and help you stand out in today’s digital landscape."
         primaryButtonText="Start Your Journey"
-        primaryButtonLink="#contact"
+        primaryButtonLink="/contact"
         secondaryButtonText="Explore Our Services"
         secondaryButtonLink="#services-overview"
       />
 
       <ServicesCards />
+
+    
+
 
       <div id="services-overview" className="container mx-auto px-6 py-16">
         <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
